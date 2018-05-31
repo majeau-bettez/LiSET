@@ -2,6 +2,10 @@ import numpy as np
 import pandas as pd
 import scipy.cluster.vq
 import jenkspy
+import matplotlib
+import matplotlib.pyplot as plt
+small = 0.1
+
 
 def cluster_vector(ds, scale='linear', categories=['green', 'yellow', 'red'], missing_data='white', method='jenks'):
     """ Regroup univariate data in clusters for LiSET analysis
@@ -69,17 +73,31 @@ def cluster_vector(ds, scale='linear', categories=['green', 'yellow', 'red'], mi
 
     return out
 
+def cluster_vector_plot(ds, labels=None, scale='linear', categories=['green', 'yellow', 'red'], method='jenks'):
+    ranking = cluster_vector(ds, scale, categories, method)
+    if labels is None:
+        try:
+            labels = ds.index
+        except:
+            labels = [i for i in range(len(ds))]
+    fig, ax = plt.subplots()
+    ax.bar(labels, ds, color=ranking)
+    ax.set_xlabel('Candidates')
+    ax.set_ylabel('Values')
+    return fig
+
+
 
 def cluster_matrix(df, scale='linear', categories=['green', 'yellow', 'red'],
         missing_data='white', method='jenks'):
-    """ Applies cluster_vector() to each column of a matrix
+    """ Applies cluster_vector() to each row of a matrix
 
     Args
     ----
 
     df: a matrix-like dataset (2-dimensional numpy array, or pandas DataFrame)
     scale: perform the clusering either on a 'linear' or a 'log' scale
-            Can be specified for whole matrix, or as a list for a per-column
+            Can be specified for whole matrix, or as a list for a per-row
             specification.
     categories: labels of the different rankings
     missing_data: labels to identify data gaps (esp. NaN)
@@ -91,21 +109,56 @@ def cluster_matrix(df, scale='linear', categories=['green', 'yellow', 'red'],
     is_array = isinstance(df, np.ndarray)
     df = pd.DataFrame(df)
 
-    # If scale specified for each table, expand this parameter to each column
+    # If scale specified for each table, expand this parameter to each row
     if scale == 'linear' or scale == 'log':
-        scale = [scale] * df.shape[1]
+        scale = [scale] * df.shape[0]
 
     # Initialize output
     out = pd.DataFrame(index=df.index, columns=df.columns)
 
     # Apply column by column
-    for j in range(len(df.columns)):
-        out.iloc[:, j] = cluster_vector(df.iloc[:,j], scale[j], categories,
+    for j in range(len(df.index)):
+        out.iloc[j, :] = cluster_vector(df.iloc[j, :], scale[j], categories,
                 missing_data, method)
     if is_array:
         out = out.values
 
     return out
+
+def cluster_matrix_plot(df, xlabels=None, ylabels=None, scale='linear', categories=['green', 'yellow', 'red'],
+        missing_data='white', method='jenks'):
+
+    if xlabels is None:
+        try:
+            xlabels = list(df.columns)
+        except:
+            xlabels = [i for i in range(df.shape[1])]
+
+
+    if ylabels is None:
+        try:
+            ylabels = list(df.index)
+        except:
+            ylabels = [i for i in range(df.shape[0])]
+
+    tmp_cat = [i+1 for i in range(len(categories))]
+    ranking = cluster_matrix(df, scale, tmp_cat, -1, method)
+    print(ranking)
+
+    cmap = matplotlib.colors.ListedColormap(categories)
+    bounds = [0,] + [i + 0.1 for i in tmp_cat]
+    print(bounds)
+    norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
+
+
+
+    fig, ax = plt.subplots(subplot_kw={'xticks': [], 'yticks': []})
+    ax.matshow(ranking, cmap=cmap, norm=norm, interpolation=None)
+    ax.set_xticklabels(['']+ list(df.columns))
+    ax.set_yticklabels(['']+ list(df.index))
+
+    return fig
+
 
 
 def _kmeans(data, categories):
