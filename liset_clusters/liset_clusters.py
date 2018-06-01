@@ -152,15 +152,15 @@ def cluster_vector_plot(ds, labels=None, scale='linear', categories=None, method
 
 
 def cluster_matrix(df, scale='linear', categories=None, missing_data='white', method='jenks'):
-    """ Regroup univariate data rows in a matrix as clusters for LiSET analysis
+    """ Concurrently cluster candidates (col) along multiple lifecycle aspects (rows) for LiSET analysis
 
     Applies cluster_vector() to each ROW of a matrix
 
     Parameters
     ----------
-    df : a matrix-like dataset (2-dimensional numpy array, or pandas DataFrame)
-        The data to be clustered
-    scale: str ['linear' | 'log'], or list of these trings
+    df : a matrix-like dataset [rows: lifecycle aspects, columns: technology candidates]
+        The data to be clustered, as numpy array or pandas DataFrame
+    scale: str ['linear' | 'log'], or list of these strings
         Perform the clustering either on the data or on the log10() of the data, to accommodate datasets with different
         spreads. Can be specified for the whole matrix with a single string, or as a list for a per-row specification.
     categories : list, default (when None) is ['green', 'yellow', 'red']
@@ -205,14 +205,15 @@ def cluster_matrix(df, scale='linear', categories=None, missing_data='white', me
 
 
 def cluster_matrix_plot(df, xlabels=None, ylabels=None, scale='linear', categories=None, missing_data='white', method='jenks'):
-    """ Produce heat-map illustrating LiSET univariate data clustering of a matrix of data
+    """
+     Produce heat-map illustrating the cluster of technology candidates (cols) along multiple lifecycle aspects (rows)
 
     A wrapper function around cluster_matrix() with plotting capability
 
     Parameters
     ----------
-    df : a matrix-like dataset (2-dimensional numpy array, or pandas DataFrame)
-        The data to be clustered
+    df : a matrix-like dataset [rows: lifecycle aspects, columns: technology candidates]
+        The data to be clustered, as numpy array or pandas DataFrame
     xlabels : list; default (if None) try to extract from df, or list of integers
         labels to identify the properties that define the clustering
     ylabels : list; default (if None) try to extract from df, or list of integers
