@@ -9,7 +9,7 @@ Motivation
 
 The Lifecycle Screening of Emerging Technologies (LiSET) is a framework to systematically and rapidly gain an overview of the environmental hotspots, relative strengths, and potential environmental show-stoppers for a large number of technology candidates. It provides guidance to combine expert judgements, qualitative data, and uncertain quantitative data in a visual map of factors likely to determine the future environmental performance of emerging technologies (a.k.a. lifecycle aspects).
 
-> Hung, C. R., Ellingsen, L. A.-W., Majeau-Bettez, G.(2018). LiSET: a framework for early stage Lifecycle Screening of Emerging Technologies. /Journal of Industrial Ecology/, In Review.
+> Hung, C. R., Ellingsen, L. A.-W., Majeau-Bettez, G.(2018). LiSET: a framework for early stage Lifecycle Screening of Emerging Technologies. _Journal of Industrial Ecology_, In Review.
 
 To combine quantitative and semi-quantitative aspects in a consistent visual map, groups of technologies are defined. How could one "objectively" divide a set of 25 competing technologies in three groups based on their relative energy efficiency? LiSET uses clustering algorithms to achieve this.
 
@@ -45,8 +45,8 @@ This module has been used in two lifecycle screening studies:
 Installation
 ------------
 
-This code should normally be installable via pip
+This module should normally be installable via `pip`:
 
-`pip install git+git://github.com/majeau-bettez/LISET#egg=liset_clusters
-
-
+```
+pip install git+git://github.com/majeau-bettez/LISET#egg=liset_clusters
+```
