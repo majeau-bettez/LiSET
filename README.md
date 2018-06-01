@@ -48,5 +48,5 @@ Installation
 This module should normally be installable via `pip`:
 
 ```
-pip install git+git://github.com/majeau-bettez/LISET#egg=liset_clusters
+pip install git+git://github.com/majeau-bettez/LISET#egg=liset
 ```

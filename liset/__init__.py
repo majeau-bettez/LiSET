@@ -1,4 +1,4 @@
 from .version import __version__
-from liset_clusters.liset_clusters import *
+from liset.liset import *
 
 __author__ = 'Guillaume Majeau-Bettez'
