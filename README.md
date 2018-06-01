@@ -37,9 +37,9 @@ Use
 
 This module has been used in two lifecycle screening studies:
 
-> Ellingsen, L. A.-W., Holland, A., Drillet, J.-F., Peters, W., Eckert, M., Concepcion, C., Ruiz, O., Colin, J.-F., Knipping, E., Pan, Q., Wills, R. G. A. and Majeau-Bettez, G. (2018) ‘Environmental Screening of Electrode Materials for a Rechargeable Aluminum Battery with an AlCl3/EMIMCl Electrolyte’, Materials, 11(6). doi: [10.3390/ma11060936](http://dx.doi.org/10.3390/ma11060936).
+> Ellingsen, L. A.-W., Holland, A., Drillet, J.-F., Peters, W., Eckert, M., Concepcion, C., Ruiz, O., Colin, J.-F., Knipping, E., Pan, Q., Wills, R. G. A. and Majeau-Bettez, G. (2018) ‘Environmental Screening of Electrode Materials for a Rechargeable Aluminum Battery with an AlCl3/EMIMCl Electrolyte’, _Materials_, 11(6). doi: [10.3390/ma11060936](http://dx.doi.org/10.3390/ma11060936).
 
-> Ellingsen, L. A.-W., Hung, C. R., Majeau-Bettez, G., Singh, B., Chen, Z., Whittingham, M. S. and Strømman, A. H. (2016) ‘Nanotechnology for environmentally sustainable electromobility’, Nature Nanotechnology. Nature Publishing Group, 11(12), pp. 1039–1051. doi: [10.1038/nnano.2016.237](http://dx.doi.org/10.1038/nnano.2016.237).
+> Ellingsen, L. A.-W., Hung, C. R., Majeau-Bettez, G., Singh, B., Chen, Z., Whittingham, M. S. and Strømman, A. H. (2016) ‘Nanotechnology for environmentally sustainable electromobility’, _Nature Nanotechnology_. Nature Publishing Group, 11(12), pp. 1039–1051. doi: [10.1038/nnano.2016.237](http://dx.doi.org/10.1038/nnano.2016.237).
 
 
 Installation
