@@ -30,7 +30,7 @@ This module:
 * Handles and highlights data gaps to accompany an iterative screening process;
 * Accepts data in various formats (lists, Numpy arrays, Pandas series and dataframes).
 
-If this code is useful to you, please cite the LiSET framework by Hung et al., and cite this code with its Digital Object Identifier (DOI): <++>.
+If this code is useful to you, please cite the LiSET framework by Hung et al., and cite this code with its Digital Object Identifier (DOI).
 
 Use
 ---
