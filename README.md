@@ -1,6 +1,9 @@
 Lifecycle Screening of Emerging Technology (LiSET) Framework
 ============================================================
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1257652.svg)](https://doi.org/10.5281/zenodo.1257652)
+
+
 This repository hosts a clustering tool to facilitate semi-quantitative, relative scoring of competing candidates in terms of multiple lifecycle aspects.
 
 
