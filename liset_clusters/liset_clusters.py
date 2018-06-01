@@ -90,7 +90,7 @@ def cluster_vector(ds, scale='linear', categories=None, missing_data='white', me
     return out
 
 
-def cluster_vector_plot(ds, labels=None, scale='linear', categories=None, method='jenks'):
+def cluster_vector_plot(ds, labels=None, scale='linear', categories=None, method='jenks', plot_scale=None):
     """ Produce bar-plot illustrating LiSET univariate data clustering of a vector of data
 
     A wrapper function around cluster_vector() with plotting capability
@@ -111,6 +111,8 @@ def cluster_vector_plot(ds, labels=None, scale='linear', categories=None, method
         Default (when None) is ['green', 'yellow', 'red']
     method : str, ['jenks' | 'kmeans'], default 'jenks'
         Which clustering algorithm to use
+    plot_scale: str, ['linear' | 'log']; defaults to be the same as the 'scale' parameter
+        Determines whether the y-axis will be on a log-scale or not
 
     Returns
     ------
@@ -133,9 +135,17 @@ def cluster_vector_plot(ds, labels=None, scale='linear', categories=None, method
         except:
             labels = [i for i in range(len(ds))]
 
+
+    bo_logplot = False
+    if plot_scale is None:
+        if scale == 'log':
+            bo_logplot = True
+    elif plot_scale == 'log':
+        bo_logplot = True
+
     # Produce graph
     fig, ax = plt.subplots()
-    ax.bar(labels, ds, color=ranking)
+    ax.bar(labels, ds, color=ranking, log=bo_logplot)
     ax.set_xlabel('Candidates')
     ax.set_ylabel('Values')
     return fig
@@ -243,22 +253,20 @@ def cluster_matrix_plot(df, xlabels=None, ylabels=None, scale='linear', categori
 
     # Perform clustering with integer categories
     #   -1 for missing data
-    #   0 for smallest cluster
-    #   1 for next smallest cluster, etc.
+    #   1 for smallest cluster
+    #   2 for next smallest cluster, etc.
     tmp_cat = [i+1 for i in range(len(categories))]
     ranking = cluster_matrix(df, scale, tmp_cat, -1, method)
-    print(ranking)
 
     # Define color map based on category color codes
     cmap = matplotlib.colors.ListedColormap([missing_data] + categories)
 
     # Set bounds:
-    #   -(1 + small) < -1 < -small : missing data, white
-    #   -small < 0 < +small : best score, green
-    #   +small < 1 < 1 + small : second best score
+    #   -(1 + small) < -1 < 0 : missing data, white
+    #   0            < 1 < 1+small : best score, green
+    #   1+small      < 2 < 2+small + small : second best score
     #   ... etc.
-    bounds = [-(1 + small), -small] + [i + small for i in tmp_cat]
-    print(bounds)
+    bounds = [-(1 + small), 0] + [i + small for i in tmp_cat]
     norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
 
     # Save to figure
